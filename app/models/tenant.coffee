@@ -13,7 +13,6 @@ Tenant = DS.Model.extend
   phone: DS.attr("string")
   fax: DS.attr("string")
   registrationInfo: DS.belongsTo("registrationInfo", polymorphic: true)
-  # registrationInfo: DS.belongsTo("registrationInfo")
   reportSettings: DS.belongsTo("reportSettings")
   postalAddress: DS.belongsTo("address")
   billingAddress: DS.belongsTo("address")
