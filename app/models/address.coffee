@@ -1,10 +1,9 @@
 `import DS from 'ember-data'`
 
 ###
-  A data model that represents an address
-
-  @class Address
-  @extends DS.Model
+ * A data model that represents an address.
+ * @class Address
+ * @extends DS.Model
 ###
 
 Address = DS.Model.extend
@@ -16,6 +15,8 @@ Address = DS.Model.extend
   city: DS.attr('string')
   state: DS.attr('string')
   country: DS.attr('string')
+  label: DS.attr('string')
+  geoPoint: DS.attr('string')
 
   ###
    * Dertermine if the address is empty
@@ -35,6 +36,10 @@ Address = DS.Model.extend
     if @get 'state'
       return false
     if @get 'country'
+      return false
+    if @get 'label'
+      return false
+    if @get 'geoPoint'
       return false
     return true
 

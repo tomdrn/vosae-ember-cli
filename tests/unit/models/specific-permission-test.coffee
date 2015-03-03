@@ -1,6 +1,6 @@
 `import { test, moduleForModel } from 'ember-qunit'`
 
-moduleForModel 'address', {
+moduleForModel 'specific-permission', {
   # Specify the other units that are required for this test.
   needs: []
 }
