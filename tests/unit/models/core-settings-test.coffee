@@ -2,7 +2,9 @@
 
 moduleForModel 'core-settings', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: [
+    'model:storageQuotasSettings'
+  ]
 }
 
 test 'it exists', (assert) ->

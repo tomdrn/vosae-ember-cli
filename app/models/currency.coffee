@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import settings from '../conf/settings'`
+`import vosaeSettings from 'vosae-web-new/conf/settings'`
 
 ###
  * A data model that represents a currency. The currency model is read only model.
@@ -7,14 +7,14 @@
  * @extends DS.Model
 ###
 
-Vosae.Currency = DS.Model.extend
+Currency = DS.Model.extend
   symbol: DS.attr('string')
   rates: DS.hasMany('exchangeRate')
   resourceURI: DS.attr('string')
 
   description: (->
     # Return the description of the current currency
-    obj = settings.currenciesDescription.findProperty 'symbol', @get('symbol')
+    obj = vosaeSettings.currenciesDescription.findProperty 'symbol', @get('symbol')
     if obj and obj.get('description')
       return obj.get('description')
     ""
@@ -24,7 +24,7 @@ Vosae.Currency = DS.Model.extend
     # The display symbol associated to the currency (e.g. '€', '$', '£').
     # The *symbol* attribute is in the iso4217 format (e.g. 'EUR', 'USD', 'GBP')
     if @get "symbol"
-      return settings.currenciesSign.findProperty('symbol', @get('symbol')).get('sign')
+      return vosaeSettings.currenciesSign.findProperty('symbol', @get('symbol')).get('sign')
     ""
   ).property('symbol')
 

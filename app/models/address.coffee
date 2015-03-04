@@ -59,5 +59,7 @@ Address = DS.Model.extend
         city: address.get 'city'
         state: address.get 'state'
         country: address.get 'country'
+        label: address.get 'label'
+        geoPoint: address.get 'geoPoint'
 
 `export default Address`

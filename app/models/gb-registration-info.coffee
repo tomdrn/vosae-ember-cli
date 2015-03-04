@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
-`import RegistrationInfo from './registration-info'`
-`import EuRegistrationInfoMixin from '../mixins/eu-registration-info'`
+`import RegistrationInfo from 'vosae-web-new/models/registration-info'`
+`import EuRegistrationInfoMixin from 'vosae-web-new/mixins/eu-registration-info'`
 
 ###
   A data model that represents registration informations for Grand Britain.
@@ -9,7 +9,7 @@
   @uses EuRegistrationInfo
 ###
 
-GbRegistrationInfo = RegistrationInfo.extend EuRegistrationInfo,
+GbRegistrationInfo = RegistrationInfo.extend EuRegistrationInfoMixin,
   countryCode: 'GB'
 
 `export default GbRegistrationInfo`

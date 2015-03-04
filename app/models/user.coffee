@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
-`import settings from '../conf/settings'`
-`import gettext from '../utils/i18n'`
+`import vosaeSettings from 'vosae-web-new/conf/settings'`
+`import {gettext} from 'vosae-web-new/utils/i18n'`
 
 ###
  * A data model that represents a user.
@@ -11,16 +11,16 @@
 User = DS.Model.extend
   email: DS.attr('string')
   fullName: DS.attr('string')
-  groups: DS.hasMany('group')
   photoUri: DS.attr('string')
   permissions: DS.attr('array', defaultValue: [])
-  # specificPermissions: DS.hasMany('specificPermission')
+  groups: DS.hasMany('group')
+  specificPermissions: DS.hasMany('specificPermission')
   settings: DS.belongsTo('userSettings')
   status: DS.attr('string')
 
   getStatus: (->
     statusValue = @get('status')
-    statusLabel = settings.userStatutes.findProperty('value', statusValue)
+    statusLabel = vosaeSettings.userStatutes.findProperty('value', statusValue)
     if statusLabel?
       return statusLabel.get('label')
     gettext('Unknown')

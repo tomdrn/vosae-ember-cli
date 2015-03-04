@@ -16,23 +16,4 @@ ApplicationAdapter = DS.DjangoTastypieAdapter.extend
     "X-Tenant": "naeka"
   }
 
-  # ###
-  #  * Add backslash to the end of the URL.
-  #  * @param  {String}   type
-  #  * @param  {String}   id
-  #  * @param  {DS.Model} record
-  #  * @return {String}
-  # ###
-  # buildURL: (type, id, record) ->
-  #   @_super(type, id) + "/"
-
-
-  # ###
-  #  * Do not pluralize the type's name
-  #  * @param  {String} type
-  #  * @return {String} type
-  # ###
-  # pathForType: (type) ->
-  #   type
-
 `export default ApplicationAdapter`

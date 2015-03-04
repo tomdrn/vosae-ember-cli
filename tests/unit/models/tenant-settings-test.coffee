@@ -2,7 +2,13 @@
 
 moduleForModel 'tenant-settings', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: [
+    'model:coreSettings'
+    'model:invoicingSettings'
+    'model:storageQuotasSettings'
+    'model:invoicingNumberingSettings'
+    'model:currency'
+  ]
 }
 
 test 'it exists', (assert) ->

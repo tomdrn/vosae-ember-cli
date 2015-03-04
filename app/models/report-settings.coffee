@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
-`import settings from '../conf/settings'`
+`import vosaeSettings from 'vosae-web-new/conf/settings'`
 
 inflector = Ember.Inflector.inflector
 inflector.irregular 'reportSettings', 'reportSettings'
@@ -21,12 +21,12 @@ ReportSettings = DS.Model.extend
   language: DS.attr("string")
 
   defaultLanguage: (->
-    settings.languages.findProperty('code', @get('language'))
+    vosaeSettings.languages.findProperty('code', @get('language'))
   ).property('language')
 
   otherLanguages: (->
     defaultLang = @get('language')
-    settings.languages.filter (language)->
+    vosaeSettings.languages.filter (language)->
       if language.get('code') != defaultLang
         return language
   ).property('language')

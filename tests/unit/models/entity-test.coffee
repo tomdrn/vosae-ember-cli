@@ -2,7 +2,16 @@
 
 moduleForModel 'entity', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: [
+    'model:address'
+    'model:phone'
+    'model:email'
+    'model:user'
+    'model:file'
+    'model:group'
+    'model:userSettings'
+    'model:specificPermission'
+  ]
 }
 
 test 'it exists', (assert) ->

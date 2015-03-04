@@ -3,10 +3,10 @@
 
 ###
  * General configuration for the Vosae application.
- * @object settings
+ * @object vosaeSettings
 ###
 
-settings =
+vosaeSettings =
 
   # AUTH_USER: AUTH_USER
   # LANGUAGE: LANGUAGE
@@ -22,12 +22,56 @@ settings =
     Ember.Object.create
       code: "en"
       name: gettext("English")
+      accountingSettings:
+        currency:
+          symbol: ''
+          format:
+            pos: '%s%v'
+            neg: '%s-%v'
+            zero: '%s%v'
+          decimal: '.'
+          thousand: ','
+          precision: 2
+        number:
+          decimal: '.'
+          thousand: ','
+          precision: 0
+
     Ember.Object.create
       code: "en-gb"
       name: gettext("British English")
+      accountingSettings:
+        currency:
+          symbol: ''
+          format:
+            pos: '%s%v'
+            neg: '%s-%v'
+            zero: '%s%v'
+          decimal: '.'
+          thousand: ','
+          precision: 2
+        number:
+          decimal: '.'
+          thousand: ','
+          precision: 0
+
     Ember.Object.create
       code: "fr"
       name: gettext("French")
+      accountingSettings:
+        currency:
+          symbol: ""
+          format:
+            pos: "%v %s"
+            neg: "-%v %s"
+            zero: "%v %s"
+          decimal: ","
+          thousand: " "
+          precision: 2
+        number:
+          decimal: ","
+          thousand: " "
+          precision: 0
   ]
 
   ###
@@ -749,10 +793,10 @@ settings =
  * @param {Object} conditions The object that contains conditions infos
  * @returns {Date}
 ###
-settings.paymentConditions.getDueDate = (baseDate, conditions) ->
+vosaeSettings.paymentConditions.getDueDate = (baseDate, conditions) ->
   dueDate = moment(baseDate).add('days', conditions.numDays)
   if conditions.endOfMonth
     dueDate.endOf('month')
   dueDate.add('days', conditions.afterDays).toDate()
 
-`export default settings`
+`export default vosaeSettings`

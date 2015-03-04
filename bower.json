@@ -13,7 +13,8 @@
     "ember-qunit-notifications": "0.0.7",
     "qunit": "~1.17.1",
     "ember-data-tastypie-adapter": "*",
-    "handlebars": "2.0.0"
+    "handlebars": "2.0.0",
+    "momentjs": "~2.9.0"
   },
   "resolutions": {
     "ember": "~1.9.1",

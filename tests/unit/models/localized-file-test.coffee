@@ -2,7 +2,10 @@
 
 moduleForModel 'localized-file', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: [
+    'model:file'
+    'model:user'
+  ]
 }
 
 test 'it exists', (assert) ->

@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import pgettext from '../utils/i18n'`
+`import pgettext from 'vosae-web-new/utils/i18n'`
 
 ###
  * A data model that represents a file.
@@ -13,9 +13,9 @@ File = DS.Model.extend
   sha1_checksum: DS.attr("string")
   downloadLink: DS.attr("string")
   streamLink: DS.attr("string")
-  ttl: DS.attr('number')
-  createdAt: DS.attr('datetime')
-  modifiedAt: DS.attr('datetime')
+  ttl: DS.attr("number")
+  createdAt: DS.attr("datetime")
+  modifiedAt: DS.attr("datetime")
   issuer: DS.belongsTo("user")
 
   # Returns the created date formated

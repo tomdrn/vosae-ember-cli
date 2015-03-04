@@ -1,11 +1,11 @@
-`import { moduleFor, test } from 'ember-qunit'`
+`import { test, moduleFor } from 'ember-qunit'`
 
-moduleFor 'adapter:tenant', 'TenantAdapter', {
+moduleFor 'transform:array', {
   # Specify the other units that are required for this test.
   # needs: ['serializer:foo']
 }
 
 # Replace this with your real tests.
 test 'it exists', (assert) ->
-  adapter = @subject()
-  assert.ok adapter
+  transform = @subject()
+  assert.ok transform

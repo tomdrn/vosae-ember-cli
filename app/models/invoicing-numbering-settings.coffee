@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
-`import settings from '../conf/settings'`
+`import vosaeSettings from 'vosae-web-new/conf/settings'`
 
 inflector = Ember.Inflector.inflector
 inflector.irregular 'invoicingNumberingSettings', 'invoicingNumberingSettings'
@@ -21,7 +21,7 @@ InvoicingNumberingSettings = DS.Model.extend
     if @get('scheme') is "N"
       preview = "00000"
     else
-      format = settings.invoicingDateFormats.findProperty('value', @get('dateFormat'))
+      format = vosaeSettings.invoicingDateFormats.findProperty('value', @get('dateFormat'))
       preview = moment().format(format.get('label'))
       preview += @get('separator') + "00000"
     preview

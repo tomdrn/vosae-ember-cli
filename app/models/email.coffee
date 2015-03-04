@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import settings from '../conf/settings'`
+`import vosaeSettings from 'vosae-web-new/conf/settings'`
 
 ###
  * A data model that represents an email.
@@ -12,7 +12,7 @@ Email = DS.Model.extend
   email: DS.attr('string')
 
   displayType: (->
-    obj = settings.emailTypeChoice.findProperty('value', @get('type'))
+    obj = vosaeSettings.emailTypeChoice.findProperty('value', @get('type'))
     return obj.get('name') if obj
     ''
   ).property('type')

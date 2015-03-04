@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import settings from '../conf/settings'`
+`import vosaeSettings from 'vosae-web-new/conf/settings'`
 
 ###
  * A data model that represents a phone.
@@ -53,7 +53,7 @@ Phone = DS.Model.extend
    * @return {String}
   ###
   displayCombinedType: (->
-    obj = settings.phoneCombinedTypes.findProperty('value', @get("combinedType"))
+    obj = vosaeSettings.phoneCombinedTypes.findProperty('value', @get("combinedType"))
     if obj then obj.get('name') else ''
   ).property("combinedType")
 
@@ -63,7 +63,7 @@ Phone = DS.Model.extend
    * @return {}
   ###
   combinedTypeChanged: (string) ->
-    obj = settings.phoneCombinedTypes.findProperty('value', string)
+    obj = vosaeSettings.phoneCombinedTypes.findProperty('value', string)
     if obj
       @set "type", obj.get("type")
       @set "subtype", obj.get("subtype")

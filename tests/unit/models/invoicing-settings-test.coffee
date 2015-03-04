@@ -2,7 +2,11 @@
 
 moduleForModel 'invoicing-settings', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: [
+    'model:currency'
+    'model:invoicingNumberingSettings'
+    'model:exchangeRate'
+  ]
 }
 
 test 'it exists', (assert) ->
