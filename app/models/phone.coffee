@@ -41,11 +41,12 @@ Phone = DS.Model.extend
    * @return {String}
   ###
   combinedType: (->
+    combined = ""
     type = @get("type")
     subtype = @get("subtype")
     if type then combined += "#{type}"
     if subtype then combined += "-#{subtype}"
-    combined or ""
+    combined
   ).property("type", "subtype")
 
   ###

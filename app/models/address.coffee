@@ -49,7 +49,7 @@ Address = DS.Model.extend
    * @return {}
   ###
   dumpDataFrom: (address) ->
-    if address.constructor.toString() is @constructor.toString()
+    if address instanceof Address
       @setProperties
         type: address.get 'type'
         postofficeBox: address.get 'postofficeBox'

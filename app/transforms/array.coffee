@@ -9,14 +9,12 @@
 
 ArrayTransform = DS.Transform.extend
   serialize: (serialized) ->
-    console.log('okiii')
-    if Em.typeOf(serialized) is 'array'
+    if Em.isArray serialized
       return serialized
     return []
 
   deserialize: (deserialized) ->
-    console.log('okiii')
-    if Em.typeOf(deserialized) is 'array'
+    if Em.isArray deserialized
       return deserialized
     return []
 

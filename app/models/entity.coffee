@@ -23,7 +23,7 @@ Entity = DS.Model.extend
 
   # Return true if entity has been created by current Vosae.User
   isOwned: (->
-    @get('creator') is @get("store.session.user")
+    @get('creator') is @get("store.sessionService.user")
   ).property 'creator'
 
 `export default Entity`
