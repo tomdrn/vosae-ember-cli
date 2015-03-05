@@ -1,10 +1,10 @@
 `import { test, moduleForModel } from 'ember-qunit'`
-`import Address from 'vosae-web-new/models/address'`
-`import Email from 'vosae-web-new/models/email'`
-`import Phone from 'vosae-web-new/models/phone'`
-`import User from 'vosae-web-new/models/user'`
-`import File from 'vosae-web-new/models/file'`
-`import SessionService from 'vosae-web-new/services/session'`
+`import Address from 'vosae/models/address'`
+`import Email from 'vosae/models/email'`
+`import Phone from 'vosae/models/phone'`
+`import User from 'vosae/models/user'`
+`import File from 'vosae/models/file'`
+`import SessionService from 'vosae/services/session'`
 
 moduleForModel 'entity', {
   # Specify the other units that are required for this test.

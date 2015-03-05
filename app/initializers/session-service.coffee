@@ -1,7 +1,6 @@
 SessionInitializer =
   name: 'session-service'
   initialize: (container, app) ->
-    console.log("initialize")
     app.inject 'view', 'sessionService', 'service:session'
     app.inject 'route', 'sessionService', 'service:session'
     app.inject 'store', 'sessionService', 'service:session'

@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import Application from '../../app';
-import Router from '../../router';
-import config from '../../config/environment';
+import Application from 'vosae/app';
+import Router from 'vosae/router';
+import config from 'vosae/config/environment';
 
 export default function startApp(attrs) {
   var application;

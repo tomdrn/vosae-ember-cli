@@ -1,5 +1,5 @@
 `import { test, moduleForModel } from 'ember-qunit'`
-`import vosaeSettings from 'vosae-web-new/conf/settings'`
+`import vosaeSettings from 'vosae/conf/settings'`
 
 moduleForModel 'report-settings', {
   # Specify the other units that are required for this test.

@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import config from './config/environment'`
+`import config from 'vosae/config/environment'`
 
 ###
   All routes for the application

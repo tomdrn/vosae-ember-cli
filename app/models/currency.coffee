@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import vosaeSettings from 'vosae-web-new/conf/settings'`
+`import vosaeSettings from 'vosae/conf/settings'`
 
 ###
  * A data model that represents a currency. The currency model is read only model.

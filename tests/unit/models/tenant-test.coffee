@@ -1,8 +1,8 @@
 `import { test, moduleForModel } from 'ember-qunit'`
-`import RegistrationInfo from 'vosae-web-new/models/registration-info'`
-`import ReportSettings from 'vosae-web-new/models/report-settings'`
-`import Address from 'vosae-web-new/models/address'`
-`import File from 'vosae-web-new/models/file'`
+`import RegistrationInfo from 'vosae/models/registration-info'`
+`import ReportSettings from 'vosae/models/report-settings'`
+`import Address from 'vosae/models/address'`
+`import File from 'vosae/models/file'`
 
 moduleForModel 'tenant', {
   # Specify the other units that are required for this test.

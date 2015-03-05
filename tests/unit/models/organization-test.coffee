@@ -1,5 +1,5 @@
 `import { test, moduleForModel } from 'ember-qunit'`
-`import Contact from 'vosae-web-new/models/contact'`
+`import Contact from 'vosae/models/contact'`
 
 moduleForModel 'organization', {
   # Specify the other units that are required for this test.

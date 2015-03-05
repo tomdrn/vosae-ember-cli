@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import pgettext from 'vosae-web-new/utils/i18n'`
+`import pgettext from 'vosae/utils/i18n'`
 
 ###
  * A data model that represents a file.

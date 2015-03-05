@@ -1,7 +1,7 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
-`import ApplicationSerializer from './application'`
-`import PolymorphicEmbeddedRecordsMixin from '../mixins/polymorphic-embedded-records'`
+`import ApplicationSerializer from 'vosae/serializers/application'`
+`import PolymorphicEmbeddedRecordsMixin from 'vosae/mixins/polymorphic-embedded-records'`
 
 ###
   Serializer for model `Tenant`.

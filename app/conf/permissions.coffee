@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import gettext from '../utils/i18n'`
+`import gettext from 'vosae/utils/i18n'`
 
 ###
  * List of permissions available for Vosae, grouped by module :

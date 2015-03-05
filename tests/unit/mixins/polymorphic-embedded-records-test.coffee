@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
-`import PolymorphicEmbeddedRecordsMixin from '../../../mixins/polymorphic-embedded-records'`
 `import { module, test } from 'qunit'`
+`import PolymorphicEmbeddedRecordsMixin from 'vosae/mixins/polymorphic-embedded-records'`
 
 module 'PolymorphicEmbeddedRecordsMixin'
 

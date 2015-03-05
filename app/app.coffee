@@ -2,8 +2,8 @@
 `import Resolver from 'ember/resolver'`
 `import loadInitializers from 'ember/load-initializers'`
 `import config from './config/environment'`
-`import vosaeSettings from 'vosae-web-new/conf/settings'`
-`import vosaeUtils from 'vosae-web-new/conf/utils'`
+`import vosaeSettings from 'vosae/conf/settings'`
+`import vosaeUtils from 'vosae/conf/utils'`
 
 
 Ember.MODEL_FACTORY_INJECTIONS = false

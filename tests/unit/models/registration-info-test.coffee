@@ -1,10 +1,10 @@
 `import { test, moduleForModel } from 'ember-qunit'`
-# `import BeRegistrationInfo from 'vosae-web-new/models/be-registration-info'`
-# `import ChRegistrationInfo from 'vosae-web-new/models/ch-registration-info'`
-# `import FrRegistrationInfo from 'vosae-web-new/models/fr-registration-info'`
-# `import GbRegistrationInfo from 'vosae-web-new/models/gb-registration-info'`
-# `import LuRegistrationInfo from 'vosae-web-new/models/lu-registration-info'`
-# `import UsRegistrationInfo from 'vosae-web-new/models/us-registration-info'`
+# `import BeRegistrationInfo from 'vosae/models/be-registration-info'`
+# `import ChRegistrationInfo from 'vosae/models/ch-registration-info'`
+# `import FrRegistrationInfo from 'vosae/models/fr-registration-info'`
+# `import GbRegistrationInfo from 'vosae/models/gb-registration-info'`
+# `import LuRegistrationInfo from 'vosae/models/lu-registration-info'`
+# `import UsRegistrationInfo from 'vosae/models/us-registration-info'`
 
 moduleForModel 'registration-info', {
   # Specify the other units that are required for this test.

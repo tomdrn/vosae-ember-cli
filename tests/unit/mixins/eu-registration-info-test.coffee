@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
-`import EuRegistrationInfoMixin from '../../../mixins/eu-registration-info'`
 `import { module, test } from 'qunit'`
+`import EuRegistrationInfoMixin from 'vosae/mixins/eu-registration-info'`
 
 module 'EuRegistrationInfoMixin'
 

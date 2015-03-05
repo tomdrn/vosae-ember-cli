@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import RegistrationInfo from 'vosae-web-new/models/registration-info'`
+`import RegistrationInfo from 'vosae/models/registration-info'`
 
 ###
   A data model that represents registration informations for United States.

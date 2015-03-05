@@ -14,5 +14,4 @@ ApplicationRoute = Ember.Route.extend
     # Fetch tenants
     tenants = @store.find 'tenant'
 
-
 `export default ApplicationRoute`

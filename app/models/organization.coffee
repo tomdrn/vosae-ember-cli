@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import Entity from 'vosae-web-new/models/entity'`
+`import Entity from 'vosae/models/entity'`
 
 ###
  * A data model that represents an organization.

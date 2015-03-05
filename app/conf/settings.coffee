@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import {gettext, pgettext} from '../utils/i18n'`
+`import {gettext, pgettext} from 'vosae/utils/i18n'`
 
 ###
  * General configuration for the Vosae application.

@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'vosae-web-new',
+    modulePrefix: 'vosae',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',

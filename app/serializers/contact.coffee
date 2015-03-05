@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import ApplicationSerializer from './application'`
+`import ApplicationSerializer from 'vosae/serializers/application'`
 
 ###
   Serializer for model `Tenant`.

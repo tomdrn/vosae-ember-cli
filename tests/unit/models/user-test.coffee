@@ -1,7 +1,7 @@
 `import { test, moduleForModel } from 'ember-qunit'`
-`import Group from 'vosae-web-new/models/group'`
-`import SpecificPermission from 'vosae-web-new/models/specific-permission'`
-`import UserSettings from 'vosae-web-new/models/user-settings'`
+`import Group from 'vosae/models/group'`
+`import SpecificPermission from 'vosae/models/specific-permission'`
+`import UserSettings from 'vosae/models/user-settings'`
 
 moduleForModel 'user', {
   # Specify the other units that are required for this test.

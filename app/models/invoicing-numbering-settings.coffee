@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
-`import vosaeSettings from 'vosae-web-new/conf/settings'`
+`import vosaeSettings from 'vosae/conf/settings'`
 
 inflector = Ember.Inflector.inflector
 inflector.irregular 'invoicingNumberingSettings', 'invoicingNumberingSettings'
