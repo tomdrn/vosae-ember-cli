@@ -5,7 +5,6 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var app = new EmberApp();
 
 app.import('bower_components/ember-data-tastypie-adapter/dist/global/ember-data-tastypie-adapter.js');
-app.import('bower_components/momentjs/moment.js');
 app.import('bower_components/momentjs/min/moment-with-locales.js');
 
 // Use `app.import` to add additional libraries to the generated

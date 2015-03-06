@@ -784,6 +784,27 @@ vosaeSettings =
       label: "%y"
   ]
 
+  timelineModels: [
+    "contactSavedTimelineEntry"
+    "organizationSavedTimelineEntry"
+    "quotationSavedTimelineEntry"
+    "invoiceSavedTimelineEntry"
+    "downPaymentInvoiceSavedTimelineEntry"
+    "creditNoteSavedTimelineEntry"
+    "quotationChangedStateTimelineEntry"
+    "invoiceChangedStateTimelineEntry"
+    "downPaymentInvoiceChangedStateTimelineEntry"
+    "creditNoteChangedStateTimelineEntry"
+    "quotationAddedAttachmentTimelineEntry"
+    "invoiceAddedAttachmentTimelineEntry"
+    "downPaymentInvoiceAddedAttachmentTimelineEntry"
+    "creditNoteAddedAttachmentTimelineEntry"
+    "quotationMakeInvoiceTimelineEntry"
+    "quotationMakeDownPaymentInvoiceTimelineEntry"
+    "invoiceCancelledTimelineEntry"
+    "downPaymentInvoiceCancelledTimelineEntry"
+  ]
+
 
 ###
  * Return the correct due date based on a date and the passed

@@ -1,10 +1,16 @@
 `import { test, moduleForModel } from 'ember-qunit'`
 
-moduleForModel 'ch-registration-info', {
+moduleForModel 'quotation-saved-timeline-entry', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: [
+    'model:user'
+    'model:userSettings'
+    'model:group'
+    'model:specificPermission'
+  ]
 }
 
 test 'it exists', (assert) ->
   model = @subject()
+  # store = @store()
   assert.ok !!model
