@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
 `import DS from 'ember-data'`
 `import formatMoney from 'accounting/format-money'`
+`import formatNumber from 'accounting/format-number'`
 
 ###
  * A data model that represents a line item.
@@ -35,18 +36,14 @@ LineItem = DS.Model.extend
       total = (@get("quantity") * @get("unitPrice"))
       return total + (total * @get("tax.rate"))
     0
-  ).property("quantity", "unitPrice", "tax.isLoaded")
+  ).property("quantity", "unitPrice", "tax.rate", "tax.isLoaded")
 
   displayTotal: (->
-    if @get('total')
-      return formatMoney @get('total')
-    formatMoney 0
+    formatMoney @get('total')
   ).property("total")
 
   displayTotalPlusTax: (->
-    if @get('totalPlusTax')
-      return formatMoney @get('totalPlusTax')
-    formatMoney 0
+    formatMoney @get('totalPlusTax')
   ).property("totalPlusTax")
 
   displayUnitPrice: (->
@@ -56,9 +53,10 @@ LineItem = DS.Model.extend
   ).property("unitPrice")
 
   displayQuantity: (->
+    # TODO : HOW SHOULD WE ROUND THE QUANTITY ?!
     if @get("quantity")
-      return formatMoney @get("quantity")
-    formatMoney 0
+      return formatNumber @get("quantity"), 2
+    formatNumber 0, 2
   ).property("quantity")
 
   guid: (->
@@ -73,32 +71,44 @@ LineItem = DS.Model.extend
       tax.then =>
         @propertyDidChange('tax')
 
-  VAT: ->
-    tax = @get 'tax'
-    new Ember.RSVP.Promise (resolve) =>
-      resolve(null) if not tax
-      tax.then (tax) =>
-        if @get("quantity") and @get("unitPrice")
-          total = (@get("quantity") * @get("unitPrice")) * tax.get("rate")
-          resolve(
-            total: total
-            tax: tax
-          )
-        resolve(null)
+  # VAT: ->
+  #   tax = @get 'tax'
+  #   new Ember.RSVP.Promise (resolve) =>
+  #     resolve(null) if not tax
+  #     tax.then (tax) =>
+  #       if @get("quantity") and @get("unitPrice")
+  #         total = (@get("quantity") * @get("unitPrice")) * tax.get("rate")
+  #         resolve(
+  #           total: total
+  #           tax: tax
+  #         )
+  #       resolve(null)
+
+  VAT: (->
+    if @get('tax.isLoaded') and @get('quantity') and @get('unitPrice')
+      if @get('tax.rate')
+        total = (@get("quantity") * @get("unitPrice")) * @get("tax.rate")
+        return {total: total, tax: @get('tax')}
+    null
+  ).property('quantity', 'unitPrice', 'tax.isLoaded', 'tax.rate')
 
   recordIsEmpty: ->
     # Return true if item is empty
     if @get 'reference'
+      console.log 'here'
       return false
     if @get 'description'
+      console.log 'here1'
       return false
     if @get 'itemId'
+      console.log 'here2'
       return false
     if @get 'quantity'
+      console.log 'here3'
       return false
     if @get 'unitPrice'
       return false
-    if @get 'tax'
+    if @get 'tax.id'
       return false
     return true
 
