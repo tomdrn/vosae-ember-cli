@@ -14,7 +14,8 @@
     "qunit": "~1.17.1",
     "ember-data-tastypie-adapter": "*",
     "handlebars": "2.0.0",
-    "momentjs": "~2.9.0"
+    "momentjs": "~2.9.0",
+    "sugarjs": "~1.4.1"
   },
   "resolutions": {
     "ember": "~1.9.1",
