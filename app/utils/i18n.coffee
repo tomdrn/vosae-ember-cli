@@ -3,7 +3,7 @@
 ###
 
 gettext = (str) -> str
-pgettext = (str, context) -> str
+pgettext = (context, str) -> str
 ngettext = (str) -> str
 
 `export {gettext, pgettext, ngettext}`

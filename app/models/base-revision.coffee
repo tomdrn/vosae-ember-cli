@@ -166,21 +166,21 @@ BaseRevision = DS.Model.extend
   # Returns an array with each tax amount
   taxes: (->
     groupedTaxes = []
-    @get("lineItems").toArray().forEach (lineItem) ->
+    @get("lineItems").forEach (lineItem) ->
       if not lineItem.get("optional")
-        lineItem.VAT().then (lineItemTax) =>
-          if lineItemTax
-            if groupedTaxes.length
-              addedd = false
-              groupedTaxes.forEach (tax) ->
-                if lineItemTax.tax.get("id") is tax.tax.get("id")
-                  tax.total = tax.total + lineItemTax.total
-                  addedd = true
-              groupedTaxes.pushObject lineItemTax unless addedd
-            else
-              groupedTaxes.pushObject lineItemTax
+        lineItemTax = lineItem.get('VAT')
+        if lineItemTax
+          if groupedTaxes.length
+            addedd = false
+            groupedTaxes.forEach (tax) ->
+              if lineItemTax.tax.get("id") is tax.tax.get("id")
+                tax.total = tax.total + lineItemTax.total
+                addedd = true
+            groupedTaxes.pushObject lineItemTax unless addedd
+          else
+            groupedTaxes.pushObject lineItemTax
     groupedTaxes
-  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax", "lineItems.@each.optional")
+  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax", "lineItems.@each.tax.isLoaded", "lineItems.@each.optional")
 
   getErrors: (type) ->
     errors = []
