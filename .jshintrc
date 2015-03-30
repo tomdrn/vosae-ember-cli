@@ -4,8 +4,6 @@
     "window",
     "-Promise"
   ],
-  "DjangoTastypieAdapter": true,
-  "DjangoTastypieSerializer": true,
   "browser": true,
   "boss": true,
   "curly": true,

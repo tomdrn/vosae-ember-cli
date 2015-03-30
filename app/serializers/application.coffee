@@ -7,9 +7,6 @@
   @extends DS.RESTSerializer
 ###
 
-ApplicationSerializer = DS.DjangoTastypieSerializer.extend
-  extractArray: (store, primaryType, payload) ->
-    payload = @normalizePayload(payload)
-    @_super(store, primaryType, payload)
+ApplicationSerializer = DS.RESTSerializer.extend()
 
 `export default ApplicationSerializer`

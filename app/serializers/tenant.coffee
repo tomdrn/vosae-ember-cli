@@ -1,7 +1,6 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
 `import ApplicationSerializer from 'vosae/serializers/application'`
-`import PolymorphicEmbeddedRecordsMixin from 'vosae/mixins/polymorphic-embedded-records'`
 
 ###
   Serializer for model `Tenant`.
@@ -9,7 +8,7 @@
   @extends ApplicationSerializer
 ###
 
-TenantSerializer = ApplicationSerializer.extend PolymorphicEmbeddedRecordsMixin,
+TenantSerializer = ApplicationSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:
     registrationInfo:
       embedded: "always"
@@ -27,10 +26,11 @@ TenantSerializer = ApplicationSerializer.extend PolymorphicEmbeddedRecordsMixin,
    * @return {Array} payload
   ###
   normalizePayload: (payload) ->
-    if payload.objects
-      for tenant in payload.objects
-        tenant['registrationInfoType'] = Em.String.camelize(tenant.registration_info.resource_type)
-        delete tenant.registration_info.resource_type
+    if payload.tenants
+      for tenant in payload.tenants
+        type = tenant.registrationInfo.contentType
+        tenant.registrationInfo['type'] = type.substr(0, 2).toLowerCase() + type.substr(2)
+        delete tenant.registrationInfo.contentType
     return payload
 
 `export default TenantSerializer`

@@ -8,11 +8,12 @@
  * @extends DS.RESTAdapter
 ###
 
-ApplicationAdapter = DS.DjangoTastypieAdapter.extend
+ApplicationAdapter = DS.RESTAdapter.extend
   host: config.APP.endpoint
   namespace: config.APP.namespace
   headers: {
-    "Authorization": "ApiKey thomas@vosae.com:9f811dd44b3567333dce068a74b9ac9e3e231d19"
+    "Authorization": "Basic dGhvbWFzQHZvc2FlLmNvbTpwYXNzd29yZA=="
+    "Accept": "application/vnd.api+json"
     "X-Tenant": "naeka"
   }
 

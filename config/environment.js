@@ -15,16 +15,16 @@ module.exports = function(environment) {
 
     APP: {
       endpoint: 'http://localhost:8000',
-      namespace: 'api/v1'
+      namespace: ''
       // Here you can pass flags/options to your application instance
       // when it is created
     },
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self'",
+      'script-src': "'self' 'unsafe-eval'",
       'font-src': "'self'",
-      'connect-src': "'self' http://localhost:8000 http://127.0.0.1:8000",
+      'connect-src': "'self'",
       'img-src': "'self'",
       'style-src': "'self'",
       'media-src': "'self'",
@@ -38,6 +38,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.contentSecurityPolicy["connect-src"] = "'self' http://localhost:8000 http://127.0.0.1:8000"
   }
 
   if (environment === 'test') {
