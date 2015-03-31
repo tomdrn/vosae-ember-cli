@@ -29,5 +29,20 @@ moduleForModel 'down-payment-invoice', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model
+
+test 'property - isInvoice', ->
+  expect(1)
+  store = @store()
+
+  Em.run ->
+    downPaymentInvoice = store.createRecord "downPaymentInvoice", {}
+    equal downPaymentInvoice.get('isInvoice'), false, "isInvoice should be false"
+
+test 'property - isDownPaymentInvoice', ->
+  expect(1)
+  store = @store()
+
+  Em.run ->
+    downPaymentInvoice = store.createRecord "downPaymentInvoice", {}
+    equal downPaymentInvoice.get('isDownPaymentInvoice'), true, "isDownPaymentInvoice should be false"
