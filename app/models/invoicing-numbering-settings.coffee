@@ -22,8 +22,7 @@ InvoicingNumberingSettings = DS.Model.extend
       preview = "00000"
     else
       format = vosaeSettings.invoicingDateFormats.findProperty('value', @get('dateFormat'))
-      preview = moment().format(format.get('label'))
-      preview += @get('separator') + "00000"
+      preview = moment().format(format.get('label')) + @get('separator') + "00000"
     preview
   ).property('scheme','dateFormat','separator')
 
