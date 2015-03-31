@@ -24,5 +24,32 @@ moduleForModel 'invoice-revision', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model
+
+test 'computed property - displayDueDate', ->
+  expect(4)
+  store = @store()
+
+  Em.run ->
+    invoiceRevision = store.createRecord "invoiceRevision", {}
+    equal invoiceRevision.get('displayDueDate'), "undefined"
+
+    invoiceRevision.set 'customPaymentConditions', "30 days"
+    equal invoiceRevision.get('displayDueDate'), "variable"
+
+    invoiceRevision.set 'dueDate', (new Date(2013, 6, 17))
+    equal invoiceRevision.get('displayDueDate'), "variable (July 17, 2013)"
+
+    invoiceRevision.set 'customPaymentConditions', null
+    equal invoiceRevision.get('displayDueDate'), "July 17, 2013"
+
+test 'computed property - displayInvoicingDate', ->
+  expect(2)
+  store = @store()
+
+  Em.run ->
+    invoiceRevision = store.createRecord "invoiceRevision", {}
+    equal invoiceRevision.get('displayInvoicingDate'), "undefined"
+
+    invoiceRevision.set 'invoicingDate', (new Date(2013, 6, 17))
+    equal invoiceRevision.get('displayInvoicingDate'), "July 17, 2013"
