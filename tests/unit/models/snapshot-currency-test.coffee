@@ -9,5 +9,4 @@ moduleForModel 'snapshot-currency', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model

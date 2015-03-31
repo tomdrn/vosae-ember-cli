@@ -26,114 +26,14 @@ BaseRevision = DS.Model.extend
   deliveryAddress: DS.belongsTo('address')
   currency: DS.belongsTo('snapshotCurrency')
 
-  # Update an invoice revision with a new currency
-  updateWithCurrency: (newCurrency) ->
-    currentCurrency = @get 'currency'
-
-    # We want to be sure that currencies are different
-    if currentCurrency.get('symbol') isnt newCurrency.get('symbol')
-      ids = @_getLineItemsReferences()
-
-      # Update <Currency>
-      if Ember.isEmpty ids
-        @set 'currency.symbol', newCurrency.get('symbol')
-        @set 'currency.rates.content', []
-        @set 'currency.rates.content', newCurrency.get('rates').toArray()
-
-      # Update all <LineItems> and then the <Currency>
-      else
-        @get('store').find("item", ids).then (items) =>
-          @_convertLineItemsPrice(currentCurrency, newCurrency)
-
-  # Convert each line item price with the new currency
-  _convertLineItemsPrice: (currentCurrency, newCurrency) ->
-    lineItems = @get 'lineItems'
-    subPromises = []
-
-    new Ember.RSVP.Promise (resolve) =>
-      resolve() if lineItems.get('length') == 0
-
-      # Currency has been updated, convert each line items
-      lineItems.forEach (lineItem, i) =>
-        subPromises.push new Ember.RSVP.Promise (resolve) =>
-          @get('store').find("item", lineItem.get('itemId')).then (item) =>
-            # Item currency and new invoice currency are the same
-            if item.get('currency.symbol') is newCurrency.get('symbol')
-
-              # If user overridden the unit price
-              if @_userOverrodeUnitPrice lineItem, item, currentCurrency
-                exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
-                lineItemPrice = lineItem.get 'unitPrice'
-
-                # Then we convert the unit price with new currency
-                lineItem.set 'unitPrice', (lineItemPrice / exchangeRate).round(2)
-
-              # User didn't overide unit price, nothing to convert
-              else
-                lineItem.set 'unitPrice', item.get 'unitPrice'
-
-            # Item currency and new invoice currency are different
-            else
-              # If user overridden the unit price
-              if @_userOverrodeUnitPrice lineItem, item, currentCurrency
-                exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
-                lineItemPrice = lineItem.get 'unitPrice'
-
-                # Then we convert the unit price with new currency
-                lineItem.set 'unitPrice', (lineItemPrice / exchangeRate).round(2)
-
-              # User didn't override unit price, just convert item price
-              else
-                exchangeRate = newCurrency.exchangeRateFor item.get('currency.symbol')
-                lineItem.set 'unitPrice', (item.get('unitPrice') / exchangeRate).round(2)
-            # Resolve subPromises
-            resolve()
-
-      Promise.all(subPromises).then () =>
-        @set 'currency.symbol', newCurrency.get('symbol')
-        @set 'currency.rates.content', []
-        @set 'currency.rates.content', newCurrency.get('rates').toArray()
-        # Resolve mainPromise
-        resolve()
-
-  # Returns true or false if user overridden an item price
-  _userOverrodeUnitPrice: (lineItem, item, currentCurrency) ->
-    lineItemPrice = lineItem.get 'unitPrice'
-    itemPrice = item.get 'unitPrice'
-    exchangeRate = currentCurrency.exchangeRateFor item.get('currency.symbol')
-
-    if lineItemPrice isnt (itemPrice / exchangeRate).round(2)
-      return true
-    false
-
-  # Returns an array of <Item> ids
-  _getLineItemsReferences: ->
-    ids = []
-    @get('lineItems').forEach (lineItem) ->
-      id = lineItem.get 'itemId'
-      if id and not ids.contains(id)
-        ids.addObject id
-    ids
-
-  # Return lineItem's index in the hasMany `lineItems`
-  getLineItemIndex: (lineItem) ->
-    index = @get('lineItems').indexOf lineItem
-    if index != -1
-      return index
-    undefined
+  billingAddressChanged: (->
+    Ember.run.once @, 'updateDeliveryAddress'
+  ).observes("billingAddress")
 
   # As long as delivery address can't be set in forms, we set
   # content from the billing address
-  updateDeliveryAddress: (->
+  updateDeliveryAddress: ->
     @get("deliveryAddress").dumpDataFrom @get("billingAddress")
-  ).observes(
-    "billingAddress.postofficeBox"
-    "billingAddress.streetAddress"
-    "billingAddress.extendedAddress"
-    "billingAddress.postalCode"
-    "billingAddress.city"
-    "billingAddress.state"
-    "billingAddress.country")
 
   # Returns quotation total
   total: (->
@@ -182,40 +82,136 @@ BaseRevision = DS.Model.extend
     groupedTaxes
   ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax", "lineItems.@each.tax.isLoaded", "lineItems.@each.optional")
 
-  getErrors: (type) ->
-    errors = []
+  # # Convert each line item price with the new currency
+  # _convertLineItemsPrice: (currentCurrency, newCurrency) ->
+  #   lineItems = @get 'lineItems'
+  #   subPromises = []
 
-    # Organization and Contact
-    if not @get("organization") and not @get("contact")
-      if type is "Invoice"
-        errors.addObject gettext("Invoice must be linked to an organization or a contact")
-      else if type is "Quotation"
-        errors.addObject gettext("Quotation must be linked to an organization or a contact")
+  #   new Ember.RSVP.Promise (resolve) =>
+  #     resolve() if lineItems.get('length') == 0
 
-    # Sender address
-    if not @get("senderAddress") or @get("senderAddress") and not @get("senderAddress.streetAddress")
-      errors.addObject gettext("Field street address of sender address must not be blank")
+  #     # Currency has been updated, convert each line items
+  #     lineItems.forEach (lineItem, i) =>
+  #       subPromises.push new Ember.RSVP.Promise (resolve) =>
+  #         @get('store').find("item", lineItem.get('itemId')).then (item) =>
+  #           # Item currency and new invoice currency are the same
+  #           if item.get('currency.symbol') is newCurrency.get('symbol')
 
-    # Receiver address
-    if not @get("billingAddress") or @get("billingAddress") and not @get("billingAddress.streetAddress")
-      errors.addObject gettext("Field street address of receiver address must not be blank")
+  #             # If user overridden the unit price
+  #             if @_userOverrodeUnitPrice lineItem, item, currentCurrency
+  #               exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
+  #               lineItemPrice = lineItem.get 'unitPrice'
 
-    # Line items
-    if @get("lineItems.length") > 0
-      @get('lineItems').forEach (item) ->
-        unless item.recordIsEmpty()
-          unless item.get("reference")
-            errors.addObject gettext("Items reference must not be blank")
-          unless item.get("description")
-            errors.addObject gettext("Items description must not be blank")
+  #               # Then we convert the unit price with new currency
+  #               lineItem.set 'unitPrice', (lineItemPrice / exchangeRate).round(2)
 
-    # Currency
-    unless @get("currency")
-      if type is "Invoice"
-        errors.addObject gettext("Invoice must have a currency")
-      else if type is "Quotation"
-        errors.addObject gettext("Quotation must have a currency")
+  #             # User didn't overide unit price, nothing to convert
+  #             else
+  #               lineItem.set 'unitPrice', item.get 'unitPrice'
 
-    return errors
+  #           # Item currency and new invoice currency are different
+  #           else
+  #             # If user overridden the unit price
+  #             if @_userOverrodeUnitPrice lineItem, item, currentCurrency
+  #               exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
+  #               lineItemPrice = lineItem.get 'unitPrice'
+
+  #               # Then we convert the unit price with new currency
+  #               lineItem.set 'unitPrice', (lineItemPrice / exchangeRate).round(2)
+
+  #             # User didn't override unit price, just convert item price
+  #             else
+  #               exchangeRate = newCurrency.exchangeRateFor item.get('currency.symbol')
+  #               lineItem.set 'unitPrice', (item.get('unitPrice') / exchangeRate).round(2)
+  #           # Resolve subPromises
+  #           resolve()
+
+  #     Promise.all(subPromises).then () =>
+  #       @set 'currency.symbol', newCurrency.get('symbol')
+  #       @set 'currency.rates.content', []
+  #       @set 'currency.rates.content', newCurrency.get('rates').toArray()
+  #       # Resolve mainPromise
+  #       resolve()
+
+  # Returns true or false if user overridden an item price
+  _userOverrodeUnitPrice: (lineItem, item, currentCurrency) ->
+    lineItemPrice = lineItem.get 'unitPrice'
+    itemPrice = item.get 'unitPrice'
+    exchangeRate = currentCurrency.exchangeRateFor item.get('currency.symbol')
+
+    if lineItemPrice isnt (itemPrice / exchangeRate).round(2)
+      return true
+    false
+
+  # Returns an array of <Item> ids
+  _getLineItemsReferences: ->
+    ids = []
+    @get('lineItems').forEach (lineItem) ->
+      id = lineItem.get 'itemId'
+      if id and not ids.contains(id)
+        ids.addObject id
+    ids
+
+  # Update an invoice revision with a new currency
+  updateWithCurrency: (newCurrency) ->
+    currentCurrency = @get 'currency'
+
+    # We want to be sure that currencies are different
+    if currentCurrency.get('symbol') isnt newCurrency.get('symbol')
+      ids = @_getLineItemsReferences()
+
+      # Update <Currency>
+      if Ember.isEmpty ids
+        @set 'currency.symbol', newCurrency.get('symbol')
+        @set 'currency.rates.content', []
+        @set 'currency.rates.content', newCurrency.get('rates').toArray()
+
+      # Update all <LineItems> and then the <Currency>
+      else
+        @get('store').find("item", ids).then (items) =>
+          @_convertLineItemsPrice(currentCurrency, newCurrency)
+
+  # Return lineItem's index in the hasMany `lineItems`
+  getLineItemIndex: (lineItem) ->
+    index = @get('lineItems').indexOf lineItem
+    if index != -1
+      return index
+    undefined
+
+  # getErrors: (type) ->
+  #   errors = []
+
+  #   # Organization and Contact
+  #   if not @get("organization") and not @get("contact")
+  #     if type is "Invoice"
+  #       errors.addObject gettext("Invoice must be linked to an organization or a contact")
+  #     else if type is "Quotation"
+  #       errors.addObject gettext("Quotation must be linked to an organization or a contact")
+
+  #   # Sender address
+  #   if not @get("senderAddress") or @get("senderAddress") and not @get("senderAddress.streetAddress")
+  #     errors.addObject gettext("Field street address of sender address must not be blank")
+
+  #   # Receiver address
+  #   if not @get("billingAddress") or @get("billingAddress") and not @get("billingAddress.streetAddress")
+  #     errors.addObject gettext("Field street address of receiver address must not be blank")
+
+  #   # Line items
+  #   if @get("lineItems.length") > 0
+  #     @get('lineItems').forEach (item) ->
+  #       unless item.recordIsEmpty()
+  #         unless item.get("reference")
+  #           errors.addObject gettext("Items reference must not be blank")
+  #         unless item.get("description")
+  #           errors.addObject gettext("Items description must not be blank")
+
+  #   # Currency
+  #   unless @get("currency")
+  #     if type is "Invoice"
+  #       errors.addObject gettext("Invoice must have a currency")
+  #     else if type is "Quotation"
+  #       errors.addObject gettext("Quotation must have a currency")
+
+  #   return errors
 
 `export default BaseRevision`

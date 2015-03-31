@@ -33,7 +33,7 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
-test 'property - displayState', ->
+test 'property - isInvoice', ->
   expect(1)
   store = @store()
 

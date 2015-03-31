@@ -32,6 +32,14 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
+test 'property - isPurchaseOrder', ->
+  expect(1)
+  store = @store()
+
+  Em.run ->
+    purchaseOrder = store.createRecord "purchaseOrder", {}
+    equal purchaseOrder.get('isPurchaseOrder'), true, "isPurchaseOrder should be true"
+
 test 'computed property - displayState', ->
   expect(vosaeSettings.purchaseOrderStatesChoices.length)
   store = @store()

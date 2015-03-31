@@ -12,5 +12,4 @@ moduleForModel 'invoice-changed-state-timeline-entry', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model

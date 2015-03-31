@@ -22,7 +22,6 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
-
 test 'relationship - registrationInfo', ->
   expect(2)
   store = @store()
@@ -34,7 +33,6 @@ test 'relationship - registrationInfo', ->
     store.find('tenant', 1).then (tenant) ->
       equal tenant.get('registrationInfo') instanceof RegistrationInfo, true, "the registrationInfo property should return a registration info"
       equal tenant.get('registrationInfo.businessEntity'), "SARL", "the registration info should have a business entity"
-
 
 test 'relationship - reportSettings', ->
   expect(2)
@@ -48,7 +46,6 @@ test 'relationship - reportSettings', ->
       equal tenant.get('reportSettings') instanceof ReportSettings, true, "the reportSettings property should return a report settings"
       equal tenant.get('reportSettings.fontName'), "bariol", "the report settings should have a font name"
 
-
 test 'relationship - postalAddress', ->
   expect(2)
   store = @store()
@@ -61,7 +58,6 @@ test 'relationship - postalAddress', ->
       equal tenant.get('postalAddress') instanceof Address, true, "the postalAddress property should return an address"
       equal tenant.get('postalAddress.country'), "France", "the postal address should have a country"
 
-
 test 'relationship - billingAddress', ->
   expect(2)
   store = @store()
@@ -73,7 +69,6 @@ test 'relationship - billingAddress', ->
     store.find('tenant', 1).then (tenant) ->
       equal tenant.get('billingAddress') instanceof Address, true, "the billingAddress property should return an address"
       equal tenant.get('billingAddress.country'), "France", "the billing address should have a country"
-
 
 test 'relationship - svgLogo', ->
   expect(2)
@@ -88,7 +83,6 @@ test 'relationship - svgLogo', ->
         equal svgLogo instanceof File, true, "the svgLogo property should return a file"
         equal svgLogo.get('name'), "myLogo.svg", "the svg logo should have name"
 
-
 test 'relationship - imgLogo', ->
   expect(2)
   store = @store()
@@ -101,7 +95,6 @@ test 'relationship - imgLogo', ->
       tenant.get('imgLogo').then (imgLogo) ->
         equal imgLogo instanceof File, true, "the imgLogo property should return a file"
         equal imgLogo.get('name'), "myImage.png", "the img logo should have name"
-
 
 test 'relationship - terms', ->
   expect(2)

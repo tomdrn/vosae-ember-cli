@@ -24,5 +24,4 @@ moduleForModel 'invoice-note', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model

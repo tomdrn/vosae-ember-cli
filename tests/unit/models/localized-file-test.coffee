@@ -10,5 +10,4 @@ moduleForModel 'localized-file', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model

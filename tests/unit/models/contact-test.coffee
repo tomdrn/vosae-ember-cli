@@ -20,7 +20,6 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
-
 test 'method - getErrors', ->
   expect(3)
   store = @store()

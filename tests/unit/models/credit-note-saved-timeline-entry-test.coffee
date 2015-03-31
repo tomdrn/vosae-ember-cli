@@ -12,5 +12,4 @@ moduleForModel 'credit-note-saved-timeline-entry', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model

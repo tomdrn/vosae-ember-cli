@@ -29,6 +29,14 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
+test 'property - isQuotation', ->
+  expect(1)
+  store = @store()
+
+  Em.run ->
+    quotation = store.createRecord "quotation", {}
+    equal quotation.get('isQuotation'), true, "isQuotation should be true"
+
 test 'computed property - displayState', ->
   expect(vosaeSettings.quotationStatesChoices.length)
   store = @store()
@@ -84,28 +92,28 @@ test 'computed property - availableStates', ->
     arrayContains availableStates.getEach('label'), "Awaiting approval"
     arrayContains availableStates.getEach('label'), "Approved"
 
-test 'isIssuable property return true if quotation could be sent', ->
+test 'computed property - isIssuable', ->
   expect(7)
   store = @store()
 
   Em.run ->
     quotation = store.createRecord "quotation", {}
-    equal quotation.get('isIssuable'), false
+    equal quotation.get('isIssuable'), false, "isIssuable return false if quotation hasn't state"
 
     quotation.set "state", "DRAFT"
-    equal quotation.get('isIssuable'), false
+    equal quotation.get('isIssuable'), false, "isIssuable return false if quotation is draft"
 
     quotation.set "state", "EXPIRED"
-    equal quotation.get('isIssuable'), true
+    equal quotation.get('isIssuable'), true, "isIssuable return true if quotation is expired"
 
     quotation.set "state", "AWAITING_APPROVAL"
-    equal quotation.get('isIssuable'), true
+    equal quotation.get('isIssuable'), true, "isIssuable return true if quotation is awaiting approval"
 
     quotation.set "state", "REFUSED"
-    equal quotation.get('isIssuable'), true
+    equal quotation.get('isIssuable'), true, "isIssuable return true if quotation is refused"
 
     quotation.set "state", "APPROVED"
-    equal quotation.get('isIssuable'), true
+    equal quotation.get('isIssuable'), true, "isIssuable return true if quotation is approved"
 
     quotation.set "state", "INVOICED"
-    equal quotation.get('isIssuable'), true
+    equal quotation.get('isIssuable'), true, "isIssuable return true if quotation is invoiced"

@@ -15,7 +15,6 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
-
 test 'relationship - issuer', ->
   expect(2)
   store = @store()
@@ -28,7 +27,6 @@ test 'relationship - issuer', ->
       equal file.get('issuer') instanceof User, true, "the issuer property should return a user"
       equal file.get('issuer.fullName'), "Thomas Durin", "the issuer should have a name"
 
-
 test 'computedProperty - displayCreatedAt', ->
   expect(1)
   store = @store()
@@ -38,7 +36,6 @@ test 'computedProperty - displayCreatedAt', ->
 
     store.find('file', 1).then (file) ->
       equal file.get('displayCreatedAt'), "November 30, 2011", "the displayCreatedAt property display the createdAt date"
-
 
 test 'computedProperty - displayModifiedAt', ->
   expect(1)

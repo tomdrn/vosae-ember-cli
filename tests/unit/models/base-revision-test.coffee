@@ -27,80 +27,21 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
-# test 'displayQuotationDate property should format the quotationDate', ->
-#   expect(2)
-#   store = @store()
+test 'computed property - updateDeliveryAddress', ->
+  expect(1)
+  store = @store()
 
-#   Em.run ->
-#     payment = store.createRecord 'payment'
-#     store.adapterForType(Vosae.QuotationRevision).load store, Vosae.QuotationRevision, {id: 1, quotation_date: "2013-07-17T14:51:37+02:00"}
-#     quotationRevision = store.find Vosae.QuotationRevision, 1
+  Em.run ->
+    deliveryAddress = store.createRecord 'address'
+    billingAddress = store.createRecord 'address'
+    baseRevision = store.createRecord 'baseRevision', {
+      'deliveryAddress': deliveryAddress,
+      'billingAddress': billingAddress
+    }
+    baseRevision.get('billingAddress').set('country', 'France')
+    expect baseRevision.get('deliveryAddress.country'), "France"
 
-#     equal quotationRevision.get('displayQuotationDate'), "July 17 2013"
-
-#     quotationRevision.set 'quotationDate', null
-
-#     equal quotationRevision.get('displayQuotationDate'), "undefined"
-
-# test 'displayQuotationValidity property should format the quotationValidity', ->
-#   store.adapterForType(Vosae.QuotationRevision).load store, Vosae.QuotationRevision, {id: 1, quotation_validity: "2013-07-17T14:51:37+02:00"}
-#   quotationRevision = store.find Vosae.QuotationRevision, 1
-
-#   equal quotationRevision.get('displayQuotationValidity'), "July 17 2013"
-
-#   quotationRevision.set 'quotationValidity', null
-
-#   equal quotationRevision.get('displayQuotationValidity'), "undefined"
-
-# test 'displayInvoicingDate property should format the invoicingDate', ->
-#   store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, invoicing_date: "2013-07-17T14:51:37+02:00"}
-#   invoiceRevision = store.find Vosae.InvoiceRevision, 1
-
-#   equal invoiceRevision.get('displayInvoicingDate'), "July 17 2013"
-
-#   invoiceRevision.set 'invoicingDate', null
-
-#   equal invoiceRevision.get('displayInvoicingDate'), "undefined"
-
-# test 'displayCreditNoteEmissionDate property should format the creditNoteEmissionDate', ->
-#   store.adapterForType(Vosae.CreditNoteRevision).load store, Vosae.CreditNoteRevision, {id: 1, credit_note_emission_date: "2013-07-17T14:51:37+02:00"}
-#   creditNoteRevision = store.find Vosae.CreditNoteRevision, 1
-
-#   equal creditNoteRevision.get('displayCreditNoteEmissionDate'), "July 17 2013"
-
-#   creditNoteRevision.set 'creditNoteEmissionDate', null
-
-#   equal creditNoteRevision.get('displayCreditNoteEmissionDate'), "undefined"
-
-# test 'displayPurchaseOrderDate property should format the purchaseOrderDate', ->
-#   store.adapterForType(Vosae.PurchaseOrderRevision).load store, Vosae.PurchaseOrderRevision, {id: 1, purchase_order_date: "2013-07-17T14:51:37+02:00"}
-#   purchaseOrderRevision = store.find Vosae.PurchaseOrderRevision, 1
-
-#   equal purchaseOrderRevision.get('displayPurchaseOrderDate'), "July 17 2013"
-
-#   purchaseOrderRevision.set 'purchaseOrderDate', null
-
-#   equal purchaseOrderRevision.get('displayPurchaseOrderDate'), "undefined"
-
-# test 'displayDueDate property should format the dueDate', ->
-#   store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1}
-#   invoiceRevision = store.find Vosae.InvoiceRevision, 1
-
-#   equal invoiceRevision.get('displayDueDate'), "undefined"
-
-#   invoiceRevision.set 'customPaymentConditions', "30 days"
-
-#   equal invoiceRevision.get('displayDueDate'), "variable"
-
-#   invoiceRevision.set 'dueDate', (new Date(2013, 6, 17))
-
-#   equal invoiceRevision.get('displayDueDate'), "variable (July 17 2013)"
-
-#   invoiceRevision.set 'customPaymentConditions', null
-
-#   equal invoiceRevision.get('displayDueDate'), "July 17 2013"
-
-test 'property - total', ->
+test 'computed property - total', ->
   expect(3)
   store = @store()
 
@@ -115,7 +56,7 @@ test 'property - total', ->
     baseRevision.get('lineItems').addObject store.createRecord('lineItem', {unitPrice: 5.30, quantity: 10})
     equal baseRevision.get('total'), 73.92, "total should add the total of each lineItems"
 
-test 'property - totalPlusTax', ->
+test 'computed property - totalPlusTax', ->
   expect(3)
   store = @store()
 
@@ -132,7 +73,7 @@ test 'property - totalPlusTax', ->
     baseRevision.get('lineItems').addObject(store.createRecord('lineItem', {unitPrice: 5.30, quantity: 10, tax: tax2}))
     equal baseRevision.get('totalPlusTax'), 86.612, "totalPlusTax should add the total with taxes of each lineItems"
 
-test 'property - displayTotal', ->
+test 'computed property - displayTotal', ->
   expect(1)
   store = @store()
 
@@ -142,7 +83,7 @@ test 'property - displayTotal', ->
     baseRevision.get('lineItems').addObject store.createRecord('lineItem', {unitPrice: 5.30, quantity: 10})
     equal baseRevision.get('displayTotal'), "$73.92", "displayTotal should format and round the total"
 
-test 'property - displayTotalPlusTax', ->
+test 'computed property - displayTotalPlusTax', ->
   expect(1)
   store = @store()
 
@@ -154,7 +95,7 @@ test 'property - displayTotalPlusTax', ->
     baseRevision.get('lineItems').addObject(store.createRecord('lineItem', {unitPrice: 5.30, quantity: 10, tax: tax2}))
     equal baseRevision.get('displayTotalPlusTax'), "$86.61", "displayTotalPlusTax should format and round the totalPlusTax"
 
-test 'property - taxes', ->
+test 'computed property - taxes', ->
   expect(5)
   store = @store()
 

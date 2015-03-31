@@ -13,5 +13,4 @@ moduleForModel 'down-payment-invoice-added-attachment-timeline-entry', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model

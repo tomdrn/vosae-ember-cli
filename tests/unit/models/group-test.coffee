@@ -14,7 +14,6 @@ test 'it exists', (assert) ->
   model = @subject()
   assert.ok !!model
 
-
 test 'relationship - createdBy', ->
   expect(2)
   store = @store()
@@ -26,7 +25,6 @@ test 'relationship - createdBy', ->
     store.find('group', 1).then (group) ->
       equal group.get('createdBy') instanceof User, true, "the createdBy property should return a user"
       equal group.get('createdBy.fullName'), "Thomas Durin", "the user should have a name"
-
 
 test 'method - loadPermissionsFromGroup', ->
   expect(1)

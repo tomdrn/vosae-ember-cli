@@ -45,4 +45,4 @@ test 'computed property - displayQuotationValidity', ->
     equal quotationRevision.get('displayQuotationValidity'), "undefined", "displayQuotationValidity should return undefined if there's no date"
 
     quotationRevision.set('quotationValidity', new Date(2013, 7, 17))
-    equal quotationRevision.get('displayQuotationValidity'), "August 17, 2013", "displayQuotationValidity should should format the quotationDate"
+    equal quotationRevision.get('displayQuotationValidity'), "August 17, 2013", "displayQuotationValidity should should format the quotationValidity"
