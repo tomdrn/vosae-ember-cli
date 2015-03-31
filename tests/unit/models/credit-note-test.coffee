@@ -31,5 +31,12 @@ moduleForModel 'credit-note', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model
+
+test 'property - isCreditNote', ->
+  expect(1)
+  store = @store()
+
+  Em.run ->
+    creditNote = store.createRecord "creditNote", {}
+    equal creditNote.get('isCreditNote'), true, "isCreditNote should be true"
