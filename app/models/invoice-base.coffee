@@ -30,23 +30,6 @@ InvoiceBase = DS.Model.extend
   isDownPaymentInvoice: false
   isCreditNote: false
 
-  displayReceiver: (->
-    # Return organization name or contact name.
-    if @get('organization')
-      return @get('organization.corporateName')
-    else if @get('contact')
-      return @get('contact.fullName')
-    return ''
-  ).property('organization.corporateName', 'contact.fullName')
-
-  addAttachmentUrl: (->
-    # Return the url to add attachment
-    if @get("id")?
-      adapter = @get('store').adapterFor 'invoiceBase'
-      return adapter.buildURL(@constructor.typeKey, @get('id')) + "add_attachment/"
-    return
-  ).property("id")
-
   relatedColor: (->
     # Returns the related color of current instance,
     # green if `Invoice`, orange if `Quotation`.
@@ -60,6 +43,23 @@ InvoiceBase = DS.Model.extend
       return true
     return false
   ).property()
+
+  displayReceiver: (->
+    # Return organization name or contact name.
+    if @get('organization') and @get('organization.corporateName')
+      return @get('organization.corporateName')
+    else if @get('contact') and @get('contact.fullName')
+      return @get('contact.fullName')
+    return ''
+  ).property('organization.corporateName', 'contact.fullName')
+
+  addAttachmentURL: (->
+    # Return the url to add attachment
+    if @get("id")?
+      invoiceBaseAdapter = @get('store').adapterFor(@constructor.typeKey)
+      return invoiceBaseAdapter.buildURL(@constructor.typeKey, @get('id')) + "/add_attachment/"
+    return
+  ).property("id")
 
   markAsState: (state) ->
     # Set state of `InvoiceBase`.
