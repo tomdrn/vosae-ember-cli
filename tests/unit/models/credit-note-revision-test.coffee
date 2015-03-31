@@ -23,5 +23,15 @@ moduleForModel 'credit-note-revision', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model
+
+test 'computed property - displayCreditNoteEmissionDate', ->
+  expect(2)
+  store = @store()
+
+  Em.run ->
+    creditNoteRevision = store.createRecord "creditNoteRevision", {}
+    equal creditNoteRevision.get('displayCreditNoteEmissionDate'), "undefined"
+
+    creditNoteRevision.set 'creditNoteEmissionDate', (new Date(2013, 6, 17))
+    equal creditNoteRevision.get('displayCreditNoteEmissionDate'), "July 17, 2013"
