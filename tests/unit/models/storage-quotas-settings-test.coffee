@@ -7,5 +7,12 @@ moduleForModel 'storage-quotas-settings', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model
+
+test 'computed property - usedSpacePercent', ->
+  expect(1)
+  store = @store()
+
+  Em.run ->
+    storageQuotasSettings = store.createRecord "storageQuotasSettings", {allocatedSpace: 20, usedSpace: 5}
+    equal storageQuotasSettings.get('usedSpacePercent'), 25, "usedSpacePercent should return a percentage"
