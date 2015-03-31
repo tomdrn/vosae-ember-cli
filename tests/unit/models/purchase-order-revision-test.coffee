@@ -23,5 +23,15 @@ moduleForModel 'purchase-order-revision', {
 
 test 'it exists', (assert) ->
   model = @subject()
-  # store = @store()
   assert.ok !!model
+
+test 'computed property - displayPurchaseOrderDate', ->
+  expect(2)
+  store = @store()
+
+  Em.run ->
+    purchaseOrderRevision = store.createRecord "purchaseOrderRevision", {}
+    equal purchaseOrderRevision.get('displayPurchaseOrderDate'), "undefined", "displayPurchaseOrderDate should return undefined if there's no date"
+
+    purchaseOrderRevision.set('purchaseOrderDate', new Date(2013, 7, 17))
+    equal purchaseOrderRevision.get('displayPurchaseOrderDate'), "August 17, 2013", "displayPurchaseOrderDate should should format the quotationDate"
