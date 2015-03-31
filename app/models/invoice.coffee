@@ -29,7 +29,7 @@ Invoice = InvoiceBase.extend
     if @get('isSaving') or not @get('isPayable')
       return false
     if @get('balance') > 0
-      uncommitedPayments = @get('payments').filterProperty('id', null)
+      uncommitedPayments = @get('payments').filterProperty('isNew', true)
       return true if uncommitedPayments.length is 0
     return false
   ).property('balance', 'payments.@each.id', 'isSaving')
@@ -90,7 +90,7 @@ Invoice = InvoiceBase.extend
   ).property('state')
 
   isIssuable: (->
-    # Determine if the `Quotation` could be sent.
+    # Determine if the `Invoice` could be sent.
     if ["DRAFT", "CANCELLED"].contains @get('state')
       return true
     return false
@@ -130,7 +130,7 @@ Invoice = InvoiceBase.extend
       return false
     unless @get('state') is "DRAFT"
       return false
-    if not @get('contact') and not @get('organization')
+    if not @get('contact.id') and not @get('organization.id')
       return false
     if not @get('currentRevision.invoicingDate') or (not @get('currentRevision.dueDate') and not @get('currentRevision.customPaymentConditions'))
       return false
