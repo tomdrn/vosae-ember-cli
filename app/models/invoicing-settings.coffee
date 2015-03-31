@@ -1,5 +1,7 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
+`import formatNumber from 'accounting/format-number'`
+`import {gettext} from 'vosae/utils/i18n'`
 
 inflector = Ember.Inflector.inflector
 inflector.irregular 'invoicingSettings', 'invoicingSettings'
@@ -36,8 +38,8 @@ InvoicingSettings = DS.Model.extend
   lateFeeRateFormated: (->
     lateFeeRate = @get("lateFeeRate")
     if lateFeeRate?
-      return accounting.formatNumber(lateFeeRate, precision: 2)
-    return
+      return formatNumber(lateFeeRate, precision: 2)
+    undefined
   ).property("lateFeeRate")
 
   currentFyStartAt: (->
