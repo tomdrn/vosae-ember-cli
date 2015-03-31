@@ -20,7 +20,7 @@ PurchaseOrder = InvoiceBase.extend InvoiceMakeableMixin,
 
   displayState: (->
     # Returns the current state readable and translated.
-    vosaeSettings.quotationStatesChoices.findProperty('value', @get('state')).get('label')
+    vosaeSettings.purchaseOrderStatesChoices.findProperty('value', @get('state')).get('label')
   ).property('state')
 
   availableStates: (->
