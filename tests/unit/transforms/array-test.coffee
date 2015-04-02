@@ -5,7 +5,6 @@ moduleFor 'transform:array', {
   # needs: ['serializer:foo']
 }
 
-# Replace this with your real tests.
 test 'it exists', (assert) ->
   transform = @subject()
   assert.ok transform

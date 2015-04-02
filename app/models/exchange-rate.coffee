@@ -8,7 +8,7 @@
 
 ExchangeRate = DS.Model.extend
   currencyTo: DS.attr('string')
-  datetime: DS.attr('datetime')
+  datetime: DS.attr('date')
   rate: DS.attr('number')
 
 `export default ExchangeRate`

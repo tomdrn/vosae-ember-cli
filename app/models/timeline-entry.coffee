@@ -8,7 +8,7 @@
 ###
 
 TimelineEntry = DS.Model.extend
-  datetime: DS.attr('datetime')
+  datetime: DS.attr('date')
   created: DS.attr('boolean')
   module: DS.attr('string')
   issuerName: DS.attr('string')

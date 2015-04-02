@@ -11,7 +11,7 @@
 
 Payment = DS.Model.extend
   issuer: DS.belongsTo('user')
-  issuedAt: DS.attr('datetime')
+  issuedAt: DS.attr('date')
   amount: DS.attr('number')
   currency: DS.belongsTo('currency')
   type: DS.attr('string')

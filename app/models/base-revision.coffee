@@ -9,7 +9,7 @@
 ###
 
 BaseRevision = DS.Model.extend
-  issueDate: DS.attr('datetime')  # read-only creation date of the invoice revision
+  issueDate: DS.attr('date')  # read-only creation date of the invoice revision
   customPaymentConditions: DS.attr('string')  # payment conditions, can replace due date considered in this case as an estimation
   revision: DS.attr('string')
   state: DS.attr('string')

@@ -9,6 +9,6 @@
 ApiKey = DS.Model.extend
   label: DS.attr('string')
   key: DS.attr('string')
-  createdAt: DS.attr('datetime')
+  createdAt: DS.attr('date')
 
 `export default ApiKey`

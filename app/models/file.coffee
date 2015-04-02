@@ -14,8 +14,8 @@ File = DS.Model.extend
   downloadLink: DS.attr("string")
   streamLink: DS.attr("string")
   ttl: DS.attr("number")
-  createdAt: DS.attr("datetime")
-  modifiedAt: DS.attr("datetime")
+  createdAt: DS.attr('date')
+  modifiedAt: DS.attr('date')
   issuer: DS.belongsTo("user")
 
   # Returns the created date formated

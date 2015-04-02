@@ -7,7 +7,7 @@
 ###
 
 InvoiceNote = DS.Model.extend
-  registrationDate: DS.attr('datetime')
+  registrationDate: DS.attr('date')
   note: DS.attr('string')
   issuer: DS.belongsTo('user')
 

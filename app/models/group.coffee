@@ -8,7 +8,7 @@
 
 Group = DS.Model.extend
   name: DS.attr('string')
-  createdAt: DS.attr('datetime')
+  createdAt: DS.attr('date')
   permissions: DS.attr('array')
   createdBy: DS.belongsTo('user')
 
