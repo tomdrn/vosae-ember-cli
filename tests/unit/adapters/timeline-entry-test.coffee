@@ -9,3 +9,9 @@ moduleFor 'adapter:timeline-entry', 'TimelineEntryAdapter', {
 test 'it exists', (assert) ->
   adapter = @subject()
   assert.ok adapter
+
+test 'method - pathForType', (assert) ->
+  expect(2)
+  adapter = @subject()
+  assert.equal adapter.pathForType(), "timeline", "without type pathForType should always returns 'timeline'"
+  assert.equal adapter.pathForType("contactSavedTimelineEntry"), "timeline", "even with a given type pathForType should always return 'timeline'"
