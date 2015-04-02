@@ -15,16 +15,16 @@ test 'computed property - preview', ->
 
   Em.run ->
     invNumbSettings = store.createRecord "invoicingNumberingSettings", {dateFormat: "Ym", scheme: "DN", separator: "-"}
-    equal invoicingNumberingSettings.get('preview'), moment().format("YYYYMM") + "-" + "00000"
+    equal invNumbSettings.get('preview'), moment().format("YYYYMM") + "-" + "00000"
 
-    invoicingNumberingSettings.set 'separator', ';'
-    equal invoicingNumberingSettings.get('preview'), moment().format("YYYYMM") + ";" + "00000"
+    invNumbSettings.set 'separator', ';'
+    equal invNumbSettings.get('preview'), moment().format("YYYYMM") + ";" + "00000"
 
-    invoicingNumberingSettings.set 'dateFormat', 'Ymd'
-    equal invoicingNumberingSettings.get('preview'), moment().format("YYYYMMDD") + ";" + "00000"
+    invNumbSettings.set 'dateFormat', 'Ymd'
+    equal invNumbSettings.get('preview'), moment().format("YYYYMMDD") + ";" + "00000"
 
-    invoicingNumberingSettings.set 'scheme', 'N'
-    equal invoicingNumberingSettings.get('preview'), "00000"
+    invNumbSettings.set 'scheme', 'N'
+    equal invNumbSettings.get('preview'), "00000"
 
 test 'computed property - schemeIsNumber', ->
   expect(2)
@@ -32,7 +32,7 @@ test 'computed property - schemeIsNumber', ->
 
   Em.run ->
     invNumbSettings = store.createRecord "invoicingNumberingSettings", {scheme: "DN"}
-    equal invoicingNumberingSettings.get('schemeIsNumber'), false, "schemeIsNumber should return false if scheme isnt number"
+    equal invNumbSettings.get('schemeIsNumber'), false, "schemeIsNumber should return false if scheme isnt number"
 
-    invoicingNumberingSettings.set 'scheme', 'N'
-    equal invoicingNumberingSettings.get('schemeIsNumber'), true, "schemeIsNumber should return true if scheme is number"
+    invNumbSettings.set 'scheme', 'N'
+    equal invNumbSettings.get('schemeIsNumber'), true, "schemeIsNumber should return true if scheme is number"
