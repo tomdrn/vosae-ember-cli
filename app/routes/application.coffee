@@ -1,4 +1,6 @@
 `import Ember from 'ember'`
+`import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin'`
+
 
 ###
   The top level route. This route is entered when Vosae first boots up
@@ -7,11 +9,12 @@
 
   @class ApplicationRoute
   @extends Ember.Route
+  @mixins ApplicationRouteMixin
 ###
 
-ApplicationRoute = Ember.Route.extend
-  model: ->
-    # Fetch tenants
-    tenants = @store.find 'tenant'
+ApplicationRoute = Ember.Route.extend ApplicationRouteMixin,
+  actions:
+    invalidateSession: ->
+      this.get('session').invalidate()
 
 `export default ApplicationRoute`

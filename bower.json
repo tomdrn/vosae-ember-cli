@@ -12,7 +12,8 @@
     "ember-qunit": "0.3.0",
     "ember-qunit-notifications": "0.0.7",
     "qunit": "~1.17.1",
-    "ember-i18n": "~3.0.1"
+    "ember-i18n": "~3.0.1",
+    "ember-simple-auth": "0.8.0-beta.1"
   },
   "devDependencies": {
     "momentjs": "~2.9.0",

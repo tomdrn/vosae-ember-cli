@@ -4,6 +4,9 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp();
 
+app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {destDir: 'assets'});
+
 app.import('bower_components/ember-i18n/lib/i18n.js');
 app.import('bower_components/ember-i18n/lib/i18n-plurals.js');
 app.import('bower_components/momentjs/min/moment-with-locales.js');
